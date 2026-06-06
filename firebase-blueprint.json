@@ -1,0 +1,86 @@
+{
+  "entities": {
+    "PortfolioItem": {
+      "title": "Portfolio Item",
+      "description": "An image or project in the portfolio gallery.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "category": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "order": { "type": "number" }
+      },
+      "required": ["title", "imageUrl", "category", "createdAt"]
+    },
+    "VideoItem": {
+      "title": "Video Item",
+      "description": "A video showcase item.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "videoUrl": { "type": "string" },
+        "thumbnailUrl": { "type": "string" },
+        "category": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "videoUrl", "category", "createdAt"]
+    },
+    "Testimonial": {
+      "title": "Testimonial",
+      "description": "Client review.",
+      "type": "object",
+      "properties": {
+        "clientName": { "type": "string" },
+        "review": { "type": "string" },
+        "rating": { "type": "number" },
+        "role": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["clientName", "review", "rating"]
+    },
+    "SiteConfig": {
+      "title": "Site Configuration",
+      "description": "Global texts and settings for the portfolio.",
+      "type": "object",
+      "properties": {
+        "heroTitle": { "type": "string" },
+        "heroSubtitle": { "type": "string" },
+        "aboutText": { "type": "string" },
+        "profileImageUrl": { "type": "string" },
+        "cvUrl": { "type": "string" },
+        "email": { "type": "string" },
+        "whatsapp": { "type": "string" },
+        "socialLinks": {
+          "type": "object",
+          "properties": {
+            "instagram": { "type": "string" },
+            "facebook": { "type": "string" },
+            "twitter": { "type": "string" },
+            "linkedin": { "type": "string" }
+          }
+        }
+      }
+    }
+  },
+  "firestore": {
+    "portfolio": {
+      "schema": "PortfolioItem",
+      "description": "Gallery of images and projects"
+    },
+    "videos": {
+      "schema": "VideoItem",
+      "description": "Video showcase collection"
+    },
+    "testimonials": {
+      "schema": "Testimonial",
+      "description": "Client reviews"
+    },
+    "config": {
+      "schema": "SiteConfig",
+      "description": "Site-wide configuration constants"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Default Deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && request.auth.token.email == "mawlanaehsan24@gmail.com" && request.auth.token.email_verified == true;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // --- PORTFOLIO ---
+    match /portfolio/{itemId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // --- VIDEOS ---
+    match /videos/{videoId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // --- TESTIMONIALS ---
+    match /testimonials/{reviewId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // --- SETTINGS/CONFIG ---
+    match /settings/{configId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+  }
+}
